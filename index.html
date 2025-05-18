@@ -1267,11 +1267,11 @@
     </style>
 </head>
 <body>
-    <!-- Магический фон -->
+    
     <div class="magic-background"></div>
     <div class="magic-particles" id="particles"></div>
 
-    <!-- Хедер -->
+    
     <header id="header">
         <div class="header-container">
             <a href="#" class="logo">
@@ -1300,7 +1300,7 @@
         </div>
     </header>
 
-    <!-- Вертикальная навигация -->
+    
     <div class="vertical-nav">
         <a href="#hero" class="active"><span>Главная</span></a>
         <a href="#sportgeschaeft"><span>Sportprofis</span></a>
@@ -1310,7 +1310,7 @@
         <a href="#golfpress"><span>Talente</span></a>
     </div>
 
-    <!-- Слайдер -->
+    
     <div class="hero-slider" id="hero">
         <div class="slides-container" id="slides">
             <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1552674605-db6ffd4facb5?auto=format&fit=crop&q=80&w=1470')">
@@ -1358,7 +1358,7 @@
         </div>
     </div>
 
-    <!-- Секция "Wir sind sportprofis" -->
+    
     <section id="sportgeschaeft">
         <div class="section-inner">
             <div class="section-title">
@@ -1376,7 +1376,7 @@
         </div>
     </section>
 
-    <!-- Секция "Premium Fitness-Studio" -->
+    
     <section id="fitnesspress">
         <div class="section-inner">
             <div class="section-title">
@@ -1400,7 +1400,7 @@
         </div>
     </section>
 
-    <!-- Секция "Online-Shops" -->
+    
     <section id="skipress">
         <div class="section-inner">
             <div class="section-title">
@@ -1424,7 +1424,7 @@
         </div>
     </section>
 
-    <!-- Секция "Schauen Sie rein..." -->
+    
     <section id="arena">
         <div class="section-inner">
             <div class="section-title">
@@ -1442,7 +1442,7 @@
         </div>
     </section>
 
-    <!-- Секция "Wir fördern Talente" -->
+    
     <section id="golfpress">
         <div class="section-inner">
             <div class="section-title">
@@ -1460,7 +1460,7 @@
         </div>
     </section>
 
-    <!-- Футер -->
+    
     <footer id="footer">
         <button class="footer-toggle">Kontakt</button>
         <div class="container">
@@ -1509,7 +1509,7 @@
     </footer>
 
     <script>
-        // Создание частиц для магического фона
+        // magic background 
         function createParticles() {
             const container = document.getElementById('particles');
             const particleCount = 15;
@@ -1518,7 +1518,7 @@
                 const particle = document.createElement('div');
                 particle.classList.add('particle');
                 
-                // Случайные размеры и позиции
+                
                 const size = Math.random() * 200 + 50;
                 const posX = Math.random() * 100;
                 const posY = Math.random() * 100;
@@ -1536,7 +1536,7 @@
             }
         }
         
-        // Автоматический слайдер с плавным исчезанием
+        // slider
         function setupSlider() {
             const slides = document.querySelectorAll('.slide');
             let currentSlide = 0;
@@ -1548,10 +1548,10 @@
                 slides[currentSlide].classList.add('active');
             }
             
-            // Автоматическое переключение каждые 5 секунд
+            
             const sliderInterval = setInterval(nextSlide, 5000);
             
-            // Остановка интервала при переключении на другую секцию
+            
             const navLinks = document.querySelectorAll('.vertical-nav a');
             navLinks.forEach(link => {
                 if (link.getAttribute('href') !== '#hero') {
@@ -1562,7 +1562,7 @@
             });
         }
         
-        // Эффект прокрутки для хедера - исчезновение при прокрутке
+        // scroll
         function setupScrollEffect() {
             const header = document.getElementById('header');
             let lastScrollTop = 0;
@@ -1580,7 +1580,7 @@
             });
         }
         
-        // Функция для переключения секций
+        // switcher for section
         function setupSectionSwitching() {
             const navLinks = document.querySelectorAll('.vertical-nav a');
             const sections = document.querySelectorAll('section, .hero-slider');
@@ -1588,65 +1588,65 @@
             const sectionsArray = Array.from(sections);
             let isAnimating = false;
             
-            // Показываем только слайдер при загрузке
+            
             document.getElementById('hero').classList.add('active');
             
-            // Функция для активации секции по индексу
+            
             function activateSection(index) {
-                // Проверяем ширину экрана - если меньше 992px, не используем анимацию переключения
+                
                 if (window.innerWidth <= 992) {
-                    // Для мобильных просто прокручиваем к нужной секции
+                   
                     const targetSection = sectionsArray[index];
                     if (targetSection) {
-                        // Используем более надежный способ прокрутки
+                        
                         window.scrollTo({
-                            top: targetSection.offsetTop - 60, // Учитываем высоту шапки
+                            top: targetSection.offsetTop - 60, 
                             behavior: 'smooth'
                         });
                         
-                        // Обновляем активную ссылку
+                        
                         navLinks.forEach(navLink => navLink.classList.remove('active'));
                         navLinks[index]?.classList.add('active');
                     }
                     return;
                 }
                 
-                // Десктопная версия без изменений
+                
                 if (isAnimating) return;
                 if (index < 0) index = 0;
                 if (index >= sectionsArray.length) index = sectionsArray.length - 1;
                 
-                // Если уже на этой секции, ничего не делаем
+                
                 if (currentSectionIndex === index) return;
                 
                 isAnimating = true;
                 
-                // Получаем текущую и новую секции
+                
                 const currentSection = sectionsArray[currentSectionIndex];
                 const newSection = sectionsArray[index];
                 
-                // Удаляем активный класс у всех ссылок
+                
                 navLinks.forEach(navLink => navLink.classList.remove('active'));
                 
-                // Добавляем активный класс соответствующей ссылке
+                
                 navLinks[index].classList.add('active');
                 
-                // Скрываем текущую секцию
+                
                 currentSection.classList.remove('active');
                 
-                // После задержки для анимации исчезновения показываем новую секцию
+                
                 setTimeout(() => {
                     newSection.classList.add('active');
                     currentSectionIndex = index;
                     
-                    // Разрешаем новые анимации после завершения текущей
+                    
                     setTimeout(() => {
                         isAnimating = false;
                     }, 1200);
                 }, 600);
             }
             
-            // Обработчик клика по навигации
+            
             navLinks.forEach((link, index) => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -1654,19 +1654,19 @@
                 });
             });
             
-            // Обработчик колесика мыши для переключения секций (только для десктопа)
+            
             window.addEventListener('wheel', function(e) {
-                if (window.innerWidth <= 992) return; // Отключаем для мобильных
+                if (window.innerWidth <= 992) return; 
                 
                 e.preventDefault();
                 
                 if (isAnimating) return;
                 
                 if (e.deltaY > 0) {
-                    // Прокрутка вниз
+                    
                     activateSection(currentSectionIndex + 1);
                 } else {
-                    // Прокрутка вверх
+                   
                     activateSection(currentSectionIndex - 1);
                 }
             }, { passive: false });
@@ -1687,9 +1687,9 @@
             });
         }
         
-        // Обработка сенсорных жестов для мобильных устройств
+        // touchscreen
         function setupTouchNavigation() {
-            // На мобильных устройствах используем стандартную прокрутку
+            
             if (window.innerWidth <= 992) {
                 return;
             }
@@ -1725,12 +1725,12 @@
                 });
                 
                 if (distance > 0) {
-                    // Свайп вверх - следующая секция
+                    
                     if (currentIndex < sectionsArray.length - 1) {
                         navLinks[currentIndex + 1].click();
                     }
                 } else {
-                    // Свайп вниз - предыдущая секция
+                    
                     if (currentIndex > 0) {
                         navLinks[currentIndex - 1].click();
                     }
@@ -1738,7 +1738,7 @@
             }
         }
         
-        // Функция для работы с футером
+        // button Kontact
         function setupFooter() {
             const footer = document.getElementById('footer');
             const footerToggle = document.querySelector('.footer-toggle');
@@ -1752,7 +1752,7 @@
             });
         }
         
-        // Функция для мобильного меню
+        // mobile menu
         function setupMobileMenu() {
             const menuToggle = document.querySelector('.mobile-menu-toggle');
             const nav = document.querySelector('nav');
@@ -1764,7 +1764,7 @@
                 topContacts.classList.toggle('open');
             });
             
-            // Закрывать меню при клике на пункт меню
+            
             const menuLinks = document.querySelectorAll('nav ul li a');
             menuLinks.forEach(link => {
                 link.addEventListener('click', function() {
@@ -1775,7 +1775,7 @@
             });
         }
         
-        // Функция для отслеживания видимой секции при скроллинге на мобильных
+        // function viewer section
         function setupMobileScrollSpy() {
             if (window.innerWidth <= 992) {
                 const sections = document.querySelectorAll('section, .hero-slider');
@@ -1802,7 +1802,7 @@
             }
         }
         
-        // Инициализация
+        // initialization
         document.addEventListener('DOMContentLoaded', () => {
             createParticles();
             setupSlider();
@@ -1813,7 +1813,7 @@
             setupMobileMenu();
             setupMobileScrollSpy();
             
-            // Обновляем при изменении размера окна
+            
             window.addEventListener('resize', setupMobileScrollSpy);
         });
     </script>
