@@ -516,11 +516,19 @@
         padding: 0 15px;
       }
 
+      .footer-column-inner{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+ 
+
       .footer-column h3 {
         font-size: 16px;
         margin-bottom: 15px;
         padding-bottom: 8px;
         font-family: var(--heading-font);
+        text-align: center;
       }
 
       .footer-column h3::after {
@@ -1624,41 +1632,49 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
-                    <h3>Sport Express</h3>
+                    <h3>Kontakt</h3>
                     <ul>
-                        <li><a href="#">Sportgeschäft</a></li>
-                        <li><a href="#">Team</a></li>
-                        <li><a href="#">Karriere</a></li>
-                        <li><a href="#">Über uns</a></li>
+                        <li><a href="#">Röntgenstrasse 17</a></li>
+                        <li><a href="#">89584 Ehingen</a></li>
+                        <li><a href="#">Tel. +49 (0)7391-58757-11</a></li>
+                        <li><a href="#">info@sportexpress.de</a></li>
+                        <li><a href="#">Mo-Fr 10:00-12:00 Uhr u. 14:00-17:00 Uhr</a></li>
                     </ul>
                 </div>
+                <div class="footer-column">
+                    <h3>Impressum/Datenschutz</h3>
+                    <ul>
+                        <li><a href="#">Datenschutz</a></li>                        
+                        <li><a href="#">Impressum</a></li>
+                        <li><a href="#">Kontakt</a></li>
+                    </ul>
+                </div>
+
                 <div class="footer-column">
                     <h3>Fitnessstudio</h3>
-                    <ul>
-                        <li><a href="#">Preisliste</a></li>
-                        <li><a href="#">Kurse</a></li>
-                        <li><a href="#">Trainer</a></li>
-                        <li><a href="#">Öffnungszeiten</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Online Shops</h3>
-                    <ul>
-                        <li><a href="#">Skipress</a></li>
-                        <li><a href="#">Golfpress</a></li>
-                        <li><a href="#">Fitnesspress</a></li>
-                        <li><a href="#">Outdoorsport</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Hotline 0739-3953</h3>
-                    <ul>
-                        <li><a href="#">Kontakt</a></li>
-                        <li><a href="#">Impressum</a></li>
-                        <li><a href="#">Datenschutz</a></li>
-                        <li><a href="#">AGB</a></li>
-                    </ul>
-                </div>
+                    <div class="footer-column-inner">
+                      <div>
+                        <h4>Öffnungszeiten</h4>
+                        <h5>Sommer ab dem 01.05-30.10</h5>
+                        <ul>
+                          <li><a href="#">Mo - Fr    8:00  – 22:00 Uhr</a></li>
+                          <li><a href="#">Samstag    10:00 – 18:00 Uhr</a></li>
+                          <li><a href="#">Sonntag /  10:00  – 18:00 Uhr</a></li>
+                          <li><a href="#">Feiertage</a></li>
+                        </ul>
+                      </div>
+                        <div>
+                        <h4>Öffnungszeiten</h4>
+                        <h5>Sommer ab dem 01.10-30.04</h5>
+                        <ul>
+                          <li><a href="#">Mo - Fr    8:00  – 23:00 Uhr</a></li>
+                          <li><a href="#">Samstag    9:00 – 21:00 Uhr</a></li>
+                          <li><a href="#">Sonntag /  09:00  – 20:00 Uhr</a></li>
+                          <li><a href="#">Feiertage</a></li>
+                        </ul>
+                      </div>                      
+                    </div>                    
+                </div>               
             </div>
             <div class="copyright">
                 &copy; 2023 Sport Express. Alle Rechte vorbehalten.
@@ -1849,18 +1865,29 @@
                 });
             });
             
-            
+            // Исправленный обработчик колесика мыши
             window.addEventListener('wheel', function(e) {
-                if (window.innerWidth <= 992) return; 
+                if (window.innerWidth <= 992) return;
                 
                 e.preventDefault();
                 
                 if (isAnimating) return;
                 
-                if (e.deltaY > 0) {                    
-                    activateSection(currentSectionIndex + 1);
-                } else {                    
-                    activateSection(currentSectionIndex - 1);
+                const currentSection = sectionsArray[currentSectionIndex];
+                const currentId = currentSection.id;
+                
+                if (e.deltaY > 0) {
+                    // Прокрутка вниз
+                    if (currentSectionIndex < sectionsArray.length - 1) {
+                        const nextSection = sectionsArray[currentSectionIndex + 1];
+                        activateSection(nextSection.id);
+                    }
+                } else {
+                    // Прокрутка вверх
+                    if (currentSectionIndex > 0) {
+                        const prevSection = sectionsArray[currentSectionIndex - 1];
+                        activateSection(prevSection.id);
+                    }
                 }
             }, { passive: false });
             
